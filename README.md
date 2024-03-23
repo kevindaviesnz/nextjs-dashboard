@@ -25,6 +25,46 @@ Placeholder data:
 Typescript definitions:
 /app/lib/definitions.ts
 
+### Data fetching
+https://auth0.com/blog/using-nextjs-server-actions-to-call-external-apis/
+/app/actions.ts
+/services/actions/comment.tsx
+https://nextjs.org/docs/pages/building-your-application/data-fetching
+/pages/blog.tsx
+```
+import type { InferGetStaticPropsType, GetStaticProps } from 'next'
+
+// posts will be populated at build time by getStaticProps()
+export default function Blog({ posts }) {
+  return (
+    <ul>
+      {posts.map((post) => (
+        <li>{post.title}</li>
+      ))}
+    </ul>
+  )
+}
+ 
+// This function gets called at build time on server-side.
+// It won't be called on client-side, so you can even do
+// direct database queries.
+export async function getStaticProps() {
+  // Call an external API endpoint to get posts.
+  // You can use any data fetching library
+  const res = await fetch('https://api.github.com/repos/vercel/next.js')
+  const posts = await res.json()
+ 
+  // By returning { props: { posts } }, the Blog component
+  // will receive `posts` as a prop at build time
+  return {
+    props: {
+      posts,
+    },
+  }
+}
+
+```
+
 ### CSS
 #### Global
 /app/ui/globacl.css
@@ -92,3 +132,26 @@ https://nextjs.org/learn/dashboard-app/setting-up-your-database
 ### Fetch data from a database
 To do
 https://nextjs.org/learn/dashboard-app/fetching-data
+
+### Static and dynamic rendering
+To do
+https://nextjs.org/learn/dashboard-app/static-and-dynamic-rendering
+
+### Streaming
+https://nextjs.org/learn/dashboard-app/streaming
+
+### Partial rendering
+https://nextjs.org/learn/dashboard-app/partial-prerendering
+
+### Adding search and pagination
+https://nextjs.org/learn/dashboard-app/adding-search-and-pagination
+
+### Mutating Data
+https://nextjs.org/learn/dashboard-app/mutating-data
+
+### Handing errors
+https://nextjs.org/learn/dashboard-app/error-handling
+
+
+### Improving accessibility
+https://nextjs.org/learn/dashboard-app/improving-accessibility
