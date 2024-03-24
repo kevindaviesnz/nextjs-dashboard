@@ -4,6 +4,25 @@ This is the starter template for the Next.js App Router Course. It contains the 
 
 For more information, see the [course curriculum](https://nextjs.org/learn) on the Next.js Website.
 
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm install -g next
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+run dev
+
+http://localhost:3000
+
+```
+
+
 Tutorial:
 https://nextjs.org/learn/dashboard-app/getting-started
 
