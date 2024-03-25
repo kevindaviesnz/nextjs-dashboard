@@ -1,60 +1,87 @@
-import AcmeLogo from '@/app/ui/acme-logo';
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
-import Link from 'next/link';
-import styles from '@/app/ui/home.module.css';
-import { lusitana } from '@/app/ui/fonts';
-import Image from 'next/image';
-import { myAction } from './actions';
-export default function Page() {
-  return (
-    <main className="flex min-h-screen flex-col p-6">
-      <div className="flex h-20 shrink-0 items-end rounded-lg bg-blue-500 p-4 md:h-52">
-        <AcmeLogo />
-      </div>
-      <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-        {/* Add Hero Images Here */}
-        <div>
-            /* You can use the action prop to invoke a Server Action from any HTML element. See /app/actions.ts */
-            <button type="button" action={myAction}>Like this article</button>
-        </div>
-      </div>
-      <div className={styles.shape} />
-      <div className="mt-4 flex grow flex-col gap-4 md:flex-row">
-      <div className="h-0 w-0 border-b-[30px] border-l-[20px] border-r-[20px] border-b-black border-l-transparent border-r-transparent"/>
-        <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-10 md:w-2/5 md:px-20">
-          <p className={`${lusitana.className}text-xl text-gray-800 md:text-3xl md:leading-normal`}>
-            <strong>Welcome to Acme.</strong> This is the example for the{' '}
-            <a href="https://nextjs.org/learn/" className="text-blue-500">
-              Next.js Learn Course
-            </a>
-            , brought to you by Vercel.
-          </p>
-          <Link
-            href="/login"
-            className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
-          >
-            <span>Log in</span> <ArrowRightIcon className="w-5 md:w-6" />
-          </Link>
-        </div>
-        <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-          {/* Add Hero Images Here */}
-          <Image
-          src="/hero-desktop.png"
-          width={1000}
-          height={760}
-          className="hidden md:block"
-          alt="Screenshots of the dashboard project showing desktop version"
-        />
-        <Image
-          src="/hero-mobile.png"
-          width={560}
-          height={620}
-          className="block md:hidden"
-          alt="Screenshot of the dashboard project showing mobile version"
-        />
+import React from 'react';
+import NewsPaperBanner from './ui/newspaper-banner';
+import NewsCategories from './ui/news-categories';
+import Articles from './ui/articles';
+import LeadingArticle from './ui/leading-article';
+import ArticlesGapHorizonal from './ui/articles-gap-horizontal';
+import NewsPaperFooter from './ui/newspaper-footer';
+import HeadlineLinksContainer from './ui/headline-links-container';
 
+const categories = ['Local', 'World', 'Technology']; // Example categories
+const leadingArticle = { imageSrc: '/leading-article.webp', headline: 'Leading article headline' }; // Example leading article
+const articlesByCategory = {
+  'World': [
+    { imageSrc: '/leading-article.webp', headline: 'World Article 1' },
+    { imageSrc: '/leading-article.webp', headline: 'World Article 2' },
+    { imageSrc: '/leading-article.webp', headline: 'World Article 3' }
+  ],
+  'Politics': [
+    { imageSrc: '/leading-article.webp', headline: 'World Article 1' },
+    { imageSrc: '/leading-article.webp', headline: 'World Article 2' },
+    { imageSrc: '/leading-article.webp', headline: 'World Article 3' }
+  ],
+  'Local': [
+    { imageSrc: '/leading-article.webp', headline: 'World Article 1' },
+    { imageSrc: '/leading-article.webp', headline: 'World Article 2' },
+    { imageSrc: '/leading-article.webp', headline: 'World Article 3' }
+  ],
+
+  // Other categories and articles...
+};
+
+const headlineLinks = [
+  { text: 'Link 1', url: '/link1' },
+  { text: 'Link 2', url: '/link2' },
+  { text: 'Link 3', url: '/link3' },
+  { text: 'Link 4', url: '/link4' },
+  { text: 'Link 5', url: '/link5' },
+  { text: 'Link 6', url: '/link6' },
+  { text: 'Link 1', url: '/link1' },
+  { text: 'Link 2', url: '/link2' },
+  { text: 'Link 3', url: '/link3' },
+  { text: 'Link 4', url: '/link4' },
+  { text: 'Link 5', url: '/link5' },
+  { text: 'Link 6', url: '/link6' },
+  { text: 'Link 1', url: '/link1' },
+  { text: 'Link 2', url: '/link2' },
+  { text: 'Link 3', url: '/link3' },
+  { text: 'Link 4', url: '/link4' },
+  { text: 'Link 5', url: '/link5' },
+  { text: 'Link 6', url: '/link6' },
+  { text: 'Link 1', url: '/link1' },
+  { text: 'Link 2', url: '/link2' },
+  { text: 'Link 3', url: '/link3' },
+  { text: 'Link 4', url: '/link4' },
+  { text: 'Link 5', url: '/link5' },
+  { text: 'Link 6', url: '/link6' },
+    
+
+  // Add more links as needed
+];
+
+const Home: React.FC = () => {
+  return (
+    <main>
+      <NewsPaperBanner
+        title="Newspaper Banner Title"
+        subtitle="Newspaper Banner Subtitle"
+        buttonText="Subscribe Now"
+      />
+      <NewsCategories categories={categories} />
+      <ArticlesGapHorizonal />
+      <LeadingArticle imageSrc={leadingArticle.imageSrc} headline={leadingArticle.headline} />
+      {Object.entries(articlesByCategory).map(([category, articles]) => (
+        <div>
+        <Articles key={category} category={category} articles={articles} />
         </div>
-      </div>
+      ))}
+      <ArticlesGapHorizonal />
+      <HeadlineLinksContainer headlineLinks={headlineLinks} />
+      <ArticlesGapHorizonal />
+      <ArticlesGapHorizonal />
+      <NewsPaperFooter />
     </main>
   );
-}
+};
+
+export default Home;
